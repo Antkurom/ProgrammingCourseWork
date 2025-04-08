@@ -12,6 +12,15 @@ The name of the Project is TO DO MANAGER
 3) Month: Work with a set of 30 days, planning your schedule for medium distance
 4) Year: The Main component of a manager, everything leads to a year, it creates everything and track everything, except some global goals, you can use it to see whole picture and play bigger plans
 
+Day: contains all tasks for this period
+
+Goals have their own lists according to the type of goals. Finished goals will go to the corresponding year.
+
+The week takes the next seven days; it takes them from the months. If the month has not been created yet (a year has not been created yet), once the dynamic week can't find enough days, then you need to create the next year, that then create every months with all days.
+
+Month: contains all days; no other class has access to them without referencing a month.
+
+Year: contains all months, goals for the year, and all statistics.
 
 ## Atributes:
 
@@ -24,14 +33,11 @@ The name of the Project is TO DO MANAGER
 4) Year: name(number), set of days in every month (for month class to know how many days it has), array of Months, overall difficulty, time spent, set of goals completed, conclusion, set of goals for not finished year.
 
 
-Day: contains all tasks for this period
-
-Goals have their own lists according to the type of goals. Finished goals will go to the corresponding year.
-
-The week takes the next seven days; it takes them from the months. If the month has not been created yet (a year has not been created yet), once the dynamic week can't find enough days, then you need to create the next year, that then create every months with all days.
-
-Month: contains all days; no other class has access to them without referencing a month.
-
-Year: contains all months, goals for the year, and all statistics.
-
 ## Functions:
+
+1) Storing and reading data
+2) Showing
+3) Removing data
+4) Filtering
+5) Calculating
+6) Sorting
