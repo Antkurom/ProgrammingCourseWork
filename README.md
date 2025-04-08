@@ -4,13 +4,13 @@ The name of the Project is TO DO MANAGER
 # Structure
 3 classes:
 
--1) Task?
+-1) Task - contains the day's achievable goal, stored at day class
 
-0) Goal?
-1) Day: This will be the main component of every other class, and it will work with tasks and contain a plan for a day
-2) Week: work with the next 7 days containing a plan for a week
-3) Month?
-4) Year: work with one year
+0) Goal - big tasks, that have some Types, to have opportunity to play relax and hobbies separetly from work, stored at separeted files. Finished conected with year
+1) Day: Has plenty of types, to understand the difficulty of it and larger groups of days, to plan and divide difficulties though the all time you have.
+2) Week: Work with a set of 7 days, one of the main structures to plan your future work, relax and others activities in short distance
+3) Month: Work with a set of 30 days, planning your schedule for medium distance
+4) Year: The Main component of a manager, everything leads to a year, it creates everything and track everything, except some global goals, you can use it to see whole picture and play bigger plans
 
 
 ## Atributes:
@@ -24,6 +24,14 @@ The name of the Project is TO DO MANAGER
 4) Year: name(number), set of days in every month (for month class to know how many days it has), array of Months, overall difficulty, time spent, set of goals completed, conclusion, set of goals for not finished year.
 
 
-## Functions:
+Day: contains all tasks for this period
 
-a. Storing and reading data to/from files: 
+Goals have their own lists according to the type of goals. Finished goals will go to the corresponding year.
+
+The week takes the next seven days; it takes them from the months. If the month has not been created yet (a year has not been created yet), once the dynamic week can't find enough days, then you need to create the next year, that then create every months with all days.
+
+Month: contains all days; no other class has access to them without referencing a month.
+
+Year: contains all months, goals for the year, and all statistics.
+
+## Functions:
