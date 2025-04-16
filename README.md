@@ -16,10 +16,10 @@ The name of the Project is TO DO MANAGER
 
 ## Atributes:
 
--1) Task: Type(work(regular time), relax(doesn't count into regular time), hobbie(count into regular time), name, description, importance (1-100), difficulty (1-10), deadline (date), time to complete (shouldn't be more than 5 hours), status(Planned, In progress, Completed), time spent (factional time to complete)
+-1) Task: Type(work(regular time), relax(doesn't count into regular time), hobbie(count into regular time), name, description, importance (1-10), difficulty (1-10), deadline (date), time to complete (shouldn't be more than 5 hours), status(Planned, In progress, Completed), time spent (factional time to complete)
 
 0) Goal: Type(life goal(more than a year), work, hobbiie(can take time, and some difficulty, but it will not be included into overall time or difficulty), relax(shouldn't have difficulty and time to complete, doesn't count to day total time)), name, description, importance (1-100), difficulty (1-100), deadline (date), time to complete (should be more than 5 hours), plan(set of Tasks), time spended, ID(optional)
-1) Day: date, Type (relax(at least one per week, not more than 2), easy day, regular day, hard day), set of Tasks for a day, overall difficulty (different litits for every type: relax < 3, easy day >= 3 and < 5, regular day >= 5 and < 10, hard day >= 10 and < 20), time expected (different litits for every type: relax < 30 minuts, easy day >= 0.5 hours and < 1.5, regular day >= 1,5 and < 3, hard day >=3 and < 6(this limit is recommendation)), time spended, thoughts after this day (how was it?)
+1) Day: date, Type (day of(at least one per week, not more than 2), easy day, regular day, hard day), set of Tasks for a day, overall difficulty (different litits for every type: relax < 3, easy day >= 3 and < 5, regular day >= 5 and < 10, hard day >= 10 and < 20), time expected (different litits for every type: relax < 30 minuts, easy day >= 0.5 hours and < 1.5, regular day >= 1,5 and < 3, hard day >=3 and < 6(this limit is recommendation)), time spended, thoughts after this day (how was it?)
 2) Week: name(what week it is), array of 7 days(links), difficulty(not more than 60), time to complete (more than 40 hours is not recommended), time spent, conclusion
 3) Month: name, array of days (positions in the year according to other months(first?, second? (It has built-in lap year recognition.))), difficulty, time to complete, time spent, conclusion
 4) Year: name(number), set of every month, set of every week, array of Months, overall difficulty, time spent, set of goals completed, conclusion, set of goals for not finished year.
@@ -69,6 +69,10 @@ Delete you can only tasks in days or goals, and everything that uses that. Every
 Most data in day, week, month, and year will be calculated (difficulty, importance, time to complete, time spent)
 
 ## Additional features:
+
+Dinamic week, month
+
+Repetition tasks
 
 Timer to track the time the user esed to complete the task, if you can do it online. Otherwise you will need to enter this value by hand.
 
