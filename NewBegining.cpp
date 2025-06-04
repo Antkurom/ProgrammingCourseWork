@@ -272,6 +272,7 @@ class Day{
                 _array_of_tasks_for_day[_tasks_stored];
                 update_statistic(task, 1);
                 sort_array_of_tasks_by_name(1);
+                _tasks_stored ++;
                 return true;
             } else{
                 std::cout << "Task limit for one day was reached. Please, delete old tasks or put new task to the different day\n";
@@ -303,11 +304,97 @@ class Day{
             }
         }
 
+        void sort_array_of_tasks_by_importance(int order){
+            if(order==1){
+                for(int i = 0; i<MAXTASKNUMBER-1; i++){
+                    for(int j = i+1; j<MAXTASKNUMBER; j++){
+                        if(_array_of_tasks_for_day[i].get_importance() > _array_of_tasks_for_day[i+1].get_importance()){
+                            Task temp = _array_of_tasks_for_day[i];
+                            _array_of_tasks_for_day[i] = _array_of_tasks_for_day[i+1];
+                            _array_of_tasks_for_day[i+1] = temp;
+                        }
+                    }
+                }
+            } else{
+                for(int i = 0; i<MAXTASKNUMBER-1; i++){
+                    for(int j = i+1; j<MAXTASKNUMBER; j++){
+                        if(_array_of_tasks_for_day[i].get_importance() < _array_of_tasks_for_day[i+1].get_importance()){
+                            Task temp = _array_of_tasks_for_day[i];
+                            _array_of_tasks_for_day[i] = _array_of_tasks_for_day[i+1];
+                            _array_of_tasks_for_day[i+1] = temp;
+                        }
+                    }
+                }
+            }
+        }
+
+        void sort_array_of_tasks_by_difficulty(int order){
+            if(order==1){
+                for(int i = 0; i<MAXTASKNUMBER-1; i++){
+                    for(int j = i+1; j<MAXTASKNUMBER; j++){
+                        if(_array_of_tasks_for_day[i].get_difficulty() > _array_of_tasks_for_day[i+1].get_difficulty()){
+                            Task temp = _array_of_tasks_for_day[i];
+                            _array_of_tasks_for_day[i] = _array_of_tasks_for_day[i+1];
+                            _array_of_tasks_for_day[i+1] = temp;
+                        }
+                    }
+                }
+            } else{
+                for(int i = 0; i<MAXTASKNUMBER-1; i++){
+                    for(int j = i+1; j<MAXTASKNUMBER; j++){
+                        if(_array_of_tasks_for_day[i].get_difficulty() < _array_of_tasks_for_day[i+1].get_difficulty()){
+                            Task temp = _array_of_tasks_for_day[i];
+                            _array_of_tasks_for_day[i] = _array_of_tasks_for_day[i+1];
+                            _array_of_tasks_for_day[i+1] = temp;
+                        }
+                    }
+                }
+            }
+        }
+
+        void sort_array_of_tasks_by_time_to_complete(int order){
+            if(order==1){
+                for(int i = 0; i<MAXTASKNUMBER-1; i++){
+                    for(int j = i+1; j<MAXTASKNUMBER; j++){
+                        if(_array_of_tasks_for_day[i].get_time_to_complete() > _array_of_tasks_for_day[i+1].get_time_to_complete()){
+                            Task temp = _array_of_tasks_for_day[i];
+                            _array_of_tasks_for_day[i] = _array_of_tasks_for_day[i+1];
+                            _array_of_tasks_for_day[i+1] = temp;
+                        }
+                    }
+                }
+            } else{
+                for(int i = 0; i<MAXTASKNUMBER-1; i++){
+                    for(int j = i+1; j<MAXTASKNUMBER; j++){
+                        if(_array_of_tasks_for_day[i].get_time_to_complete() < _array_of_tasks_for_day[i+1].get_time_to_complete()){
+                            Task temp = _array_of_tasks_for_day[i];
+                            _array_of_tasks_for_day[i] = _array_of_tasks_for_day[i+1];
+                            _array_of_tasks_for_day[i+1] = temp;
+                        }
+                    }
+                }
+            }
+        }
+
         void show_date(){
             char output[50];
             struct tm datetime = *localtime(&_date);
             strftime(output, 50, "%d %B %Y", &datetime);
             std::cout << output;
+        }
+
+        void show_day(){
+            std::cout << "\n///////////////////////////////////////////\n"
+            << "Date: ";
+            show_date();
+            std::cout << "\nTotal importance: " << _total_importance
+            << "\nTotal difficulty: " << _total_difficulty
+            << "\nTotal time to complete: " << _time_to_complete
+            << "\nAll tasks:\n";
+            for(int i = 0; i<_tasks_stored; i++){
+                std::cout << "\nTask 1:\n";
+                _array_of_tasks_for_day[i].show_task();
+            }
         }
 };
 
@@ -486,17 +573,112 @@ class Goal{
 
         }
 
-        // bool add_task(Task task){
-        //     if(_tasks_stored < MAXTASKNUMBER){
-        //         _allTasks[_tasks_stored];
-        //         update_statistic(task, 1); // 1 mean add not delete
-        //         sort_array_of_tasks_by_name(1); // 1 mean sorting type
-        //         return true;
-        //     } else{
-        //         std::cout << "Task limit for one day was reached. Please, delete old tasks or put new task to the different day\n";
-        //         return false;
-        //     }
-        // }
+        void sort_array_of_tasks_by_name(int order){
+            if(order==1){
+                for(int i = 0; i<MAXTASKNUMBER-1; i++){
+                    for(int j = i+1; j<MAXTASKNUMBER; j++){
+                        if(_allTasks[i].get_name() > _allTasks[i+1].get_name()){
+                            Task temp = _allTasks[i];
+                            _allTasks[i] = _allTasks[i+1];
+                            _allTasks[i+1] = temp;
+                        }
+                    }
+                }
+            } else{
+                for(int i = 0; i<MAXTASKNUMBER-1; i++){
+                    for(int j = i+1; j<MAXTASKNUMBER; j++){
+                        if(_allTasks[i].get_name() < _allTasks[i+1].get_name()){
+                            Task temp = _allTasks[i];
+                            _allTasks[i] = _allTasks[i+1];
+                            _allTasks[i+1] = temp;
+                        }
+                    }
+                }
+            }
+        }
+
+        void sort_array_of_tasks_by_importance(int order){
+            if(order==1){
+                for(int i = 0; i<MAXTASKNUMBER-1; i++){
+                    for(int j = i+1; j<MAXTASKNUMBER; j++){
+                        if(_allTasks[i].get_importance() > _allTasks[i+1].get_importance()){
+                            Task temp = _allTasks[i];
+                            _allTasks[i] = _allTasks[i+1];
+                            _allTasks[i+1] = temp;
+                        }
+                    }
+                }
+            } else{
+                for(int i = 0; i<MAXTASKNUMBER-1; i++){
+                    for(int j = i+1; j<MAXTASKNUMBER; j++){
+                        if(_allTasks[i].get_importance() < _allTasks[i+1].get_importance()){
+                            Task temp = _allTasks[i];
+                            _allTasks[i] = _allTasks[i+1];
+                            _allTasks[i+1] = temp;
+                        }
+                    }
+                }
+            }
+        }
+
+        void sort_array_of_tasks_by_difficulty(int order){
+            if(order==1){
+                for(int i = 0; i<MAXTASKNUMBER-1; i++){
+                    for(int j = i+1; j<MAXTASKNUMBER; j++){
+                        if(_allTasks[i].get_difficulty() > _allTasks[i+1].get_difficulty()){
+                            Task temp = _allTasks[i];
+                            _allTasks[i] = _allTasks[i+1];
+                            _allTasks[i+1] = temp;
+                        }
+                    }
+                }
+            } else{
+                for(int i = 0; i<MAXTASKNUMBER-1; i++){
+                    for(int j = i+1; j<MAXTASKNUMBER; j++){
+                        if(_allTasks[i].get_difficulty() < _allTasks[i+1].get_difficulty()){
+                            Task temp = _allTasks[i];
+                            _allTasks[i] = _allTasks[i+1];
+                            _allTasks[i+1] = temp;
+                        }
+                    }
+                }
+            }
+        }
+
+        void sort_array_of_tasks_by_time_to_complete(int order){
+            if(order==1){
+                for(int i = 0; i<MAXTASKNUMBER-1; i++){
+                    for(int j = i+1; j<MAXTASKNUMBER; j++){
+                        if(_allTasks[i].get_time_to_complete() > _allTasks[i+1].get_time_to_complete()){
+                            Task temp = _allTasks[i];
+                            _allTasks[i] = _allTasks[i+1];
+                            _allTasks[i+1] = temp;
+                        }
+                    }
+                }
+            } else{
+                for(int i = 0; i<MAXTASKNUMBER-1; i++){
+                    for(int j = i+1; j<MAXTASKNUMBER; j++){
+                        if(_allTasks[i].get_time_to_complete() < _allTasks[i+1].get_time_to_complete()){
+                            Task temp = _allTasks[i];
+                            _allTasks[i] = _allTasks[i+1];
+                            _allTasks[i+1] = temp;
+                        }
+                    }
+                }
+            }
+        }
+
+        bool add_task(Task task){
+            if(_tasks_stored < MAXTASKNUMBER){
+                _allTasks[_tasks_stored];
+                _tasks_stored ++;
+                return true;
+            } else{
+                std::cout << "Task limit for one goal was reached. Please, delete old tasks or put new task to the different goal\n";
+                return false;
+            }
+        }
 
 
         void show_goal(){
@@ -510,7 +692,12 @@ class Goal{
             << "Name of the goal: " << _name 
             << "\nImportance: " << _importance 
             << "\nDifficulty: " << _difficulty
-            << "\nDeadline: " << output;
+            << "\nDeadline: " << output
+            << "\nAll tasks connected to the goal:";
+            for(int i = 0; i<_tasks_stored; i++){
+                std::cout << "\nTask "<< i << " - ";
+                _allTasks[i].show_task();
+            }
             std::cout << "\n//////////////////////////////////////////\n";
         }
      
@@ -568,10 +755,10 @@ void create_year(int year, YearData allYears[MAXYEARNUMBER]){
 }
 
 
-void create_day(YearData allYear[]){
+void create_day(YearData allYears[]){
     Day random_day;
     random_day.set_date();
-    allYear[random_day.get_year()].Days[random_day.get_day_of_the_year()] = &random_day; // add day to the year at the day of the year position
+    allYears[random_day.get_year()].Days[random_day.get_day_of_the_year()] = &random_day; // add day to the year at the day of the year position
 }
 
 
@@ -616,7 +803,7 @@ void connecting_task_with_a_goal(Goal allGoals[], int totalGoal){
     }
 }
 
-void creation_of_a_task(YearData allYear[], Goal allGoal[], int totalGoal,  int answer){
+void creation_of_a_task(YearData allYears[], Goal allGoal[], int totalGoal,  int answer){
     Task newtask;
     newtask.set_name();
     newtask.set_importance();
@@ -624,19 +811,19 @@ void creation_of_a_task(YearData allYear[], Goal allGoal[], int totalGoal,  int 
     newtask.set_time_to_complete();
     newtask.show_task();
 
-    connecting_task_with_a_day(allYear, newtask);
+    connecting_task_with_a_day(allYears, newtask);
     if(answer==2)
         connecting_task_with_a_goal(allGoal, totalGoal);
 }
 
-void connecting_task_with_a_day(YearData allYear[], Task newtask){
+void connecting_task_with_a_day(YearData allYears[], Task newtask){
     bool yes = false;
     while(!yes){
         std::cout << "\n++++++++++++++++++++++++++++++++++++++++++++++++++\n" 
         << "Now lets connect it with a day\n" 
         << "Chose the year:\n";
         for(int i = 0; i<MAXYEARNUMBER; i++){
-            std::cout << "Type " << i << " for " << allYear[i].year << " year;\n";
+            std::cout << "Type " << i << " for " << allYears[i].year << " year;\n";
         }
         int year;
         while (true) {
@@ -653,12 +840,12 @@ void connecting_task_with_a_day(YearData allYear[], Task newtask){
             std::cout << "Invalid number, please try again\n";
             std::cout << "Please enter a valid number: \n";
         }
-        std::cout << "\nYou chose " << allYear[year].year << " year\n"
+        std::cout << "\nYou chose " << allYears[year].year << " year\n"
         << "------------------------------------------------\n"
         << "Now chose the day:\n";
-        for(int i = 0; i<allYear->totaldays; i++){
+        for(int i = 0; i<allYears->totaldays; i++){
             std::cout << "Type " << i << "to chose ";
-            allYear[year].Days[i]->show_date();
+            allYears[year].Days[i]->show_date();
         }
         int day;
         while (true) {
@@ -676,8 +863,8 @@ void connecting_task_with_a_day(YearData allYear[], Task newtask){
             std::cout << "Please enter a valid number: \n";
         }
         std::cout << "\nYou chose ";
-        allYear[year].Days[day]->show_date();
-        if(allYear[year].Days[day]->add_task(newtask)){
+        allYears[year].Days[day]->show_date();
+        if(allYears[year].Days[day]->add_task(newtask)){
                 std::cout << "Your task is successfully stored and connected to a day.\n"
                 << "+++++++++++++++++++++++++++++++++++++++++++++++++++\n";
         }else{
@@ -707,7 +894,7 @@ void connecting_task_with_a_day(YearData allYear[], Task newtask){
 }
 
 
-void create_task(YearData allYear[], Goal allGoal[], int totalGoals){
+void create_task(YearData allYears[], Goal allGoal[], int totalGoals){
     std::cout << "\n///////////////////////////////////////////////////////////////////////////////////\n";
     std::cout << "To create a task you need to connect it with a day, and potentially with a goal.\n"
     << "Press 0 to exit.\n"
@@ -733,9 +920,8 @@ void create_task(YearData allYear[], Goal allGoal[], int totalGoals){
     }
 
     if(answer > 0)
-        creation_of_a_task(allYear, allGoal, totalGoals, answer);
+        creation_of_a_task(allYears, allGoal, totalGoals, answer);
 
-    
 }
 
 
@@ -753,12 +939,10 @@ int main(){
     << "3 - Create a task;\n"
     << "4 - Show day;\n"
     << "5 - Show goal;\n"
-    << "6 - Show all days;\n"
-    << "7 - Show all goals;\n"
-    << "8 - Delete a day;\n"
-    << "9 - Delete a goal;\n"
-    << "10 - Delete a task;\n"
-    << "11 - End program;\n";
+    << "6 - Delete a day;\n"
+    << "7 - Delete a goal;\n"
+    << "8 - Delete a task;\n"
+    << "9 - End program;\n";
     std::cout << "*****************************************************************************\n"
     << "\nPlease enter what you want to do: ";
 
@@ -770,7 +954,7 @@ int main(){
         // This code converts from string to number safely.
         std::stringstream myStream(input);
         if (myStream >> answer){
-            if(1<=answer && answer<=11){
+            if(1<=answer && answer<=9){
                 break;
             }
         }
@@ -783,11 +967,187 @@ int main(){
             create_day(allYears);
         case 2:
             create_goal(allGoals, totalGoal);
-        // case 3:
+        case 3:
+            create_task(allYears, allGoals, totalGoal);
+        case 4:
+            std::cout << "\n++++++++++++++++++++++++++++++++++++++++++++++++++\n" 
+            << "Now lets find a day that you what to show\n" 
+            << "Chose the year:\n";
+            for(int i = 0; i<MAXYEARNUMBER; i++){
+                std::cout << "Type " << i << " for " << allYears[i].year << " year;\n";
+            }
+            int year;
+            while (true) {
+                std::string input = "";
+                getline(std::cin, input);
+
+                // This code converts from string to number safely.
+                std::stringstream myStream(input);
+                if (myStream >> year){
+                    if(0<year && year<MAXYEARNUMBER){
+                        break;
+                    }
+                }
+                std::cout << "Invalid number, please try again\n";
+                std::cout << "Please enter a valid number: \n";
+            }
+            std::cout << "\nYou chose " << allYears[year].year << " year\n"
+            << "------------------------------------------------\n"
+            << "Now chose the day:\n";
+            for(int i = 0; i<allYears->totaldays; i++){
+                std::cout << "Type " << i << "to chose ";
+                allYears[year].Days[i]->show_date();
+            }
+            int day;
+            while (true) {
+                std::string input = "";
+                getline(std::cin, input);
+
+                // This code converts from string to number safely.
+                std::stringstream myStream(input);
+                if (myStream >> day){
+                    if(0<day && day<MAXYEARNUMBER){
+                        break;
+                    }
+                }
+                std::cout << "Invalid number, please try again\n";
+                std::cout << "Please enter a valid number: \n";
+            }
+            std::cout << "\nYou chose ";
+            allYears[year].Days[day]->show_date();
+            std::cout << "\n===========================================\n"
+            << "Now choose the order that you want to see tasks inside the day:\n"
+            << "By name - 1\n"
+            << "By importance - 2\n"
+            << "By difficulty - 3\n"
+            << "By time to complete - 4\n"
+            << "Choose out of provided variant: ";
+            int order;
+            while (true) {
+                std::string input = "";
+                getline(std::cin, input);
         
-        // case 4:
+                // This code converts from string to number safely.
+                std::stringstream myStream(input);
+                if (myStream >> order){
+                    if(1<=order && order<=4){
+                        break;
+                    }
+                }
+                std::cout << "Invalid number, please try again\n";
+                std::cout << "Please enter a valid number: \n";
+            }
+
+            std::cout << "Now chose in what order:\n" 
+            << "Ascending - 1\n"
+            << "Descending - 0\n"
+            << "Choose order:";
+            int another_order;
+            while (true) {
+                std::string input = "";
+                getline(std::cin, input);
         
-        // case 5: 
+                // This code converts from string to number safely.
+                std::stringstream myStream(input);
+                if (myStream >> another_order){
+                    if(0<=another_order && another_order<=1){
+                        break;
+                    }
+                }
+                std::cout << "Invalid number, please try again\n";
+                std::cout << "Please enter a valid number: \n";
+            }
+            switch(order){
+                case 1:
+                    allYears[year].Days[day]->sort_array_of_tasks_by_name(another_order);
+                case 2:
+                    allYears[year].Days[day]->sort_array_of_tasks_by_importance(another_order);
+                case 3:
+                    allYears[year].Days[day]->sort_array_of_tasks_by_difficulty(another_order);
+                case 4:
+                    allYears[year].Days[day]->sort_array_of_tasks_by_time_to_complete(another_order);
+            }
+            allYears[year].Days[day]->show_day();
+            std::cout << "===============================================\n";
+
+        case 5:
+            std::cout << "===============================================\n"
+            << "Now choose the goal you want to see:";
+            for(int i = 0; i>totalGoal; i++){
+                std::cout << "\nGoal " << i << " - " << allGoals[i].get_name();
+            }
+            std::cout << "\nWhat is your choice?\n";
+            int goal;
+            while (true) {
+                std::string input = "";
+                getline(std::cin, input);
+
+                // This code converts from string to number safely.
+                std::stringstream myStream(input);
+                if (myStream >> goal){
+                    if(0<goal && goal<MAXYEARNUMBER){
+                        break;
+                    }
+                }
+                std::cout << "Invalid number, please try again\n";
+                std::cout << "Please enter a valid number: \n";
+            }
+            std::cout << "\n----------------------------------------------------\n"
+            << "Now choose the order that you want to see tasks inside the goal:\n"
+            << "By name - 1\n"
+            << "By importance - 2\n"
+            << "By difficulty - 3\n"
+            << "By time to complete - 4\n"
+            << "Choose out of provided variant: ";
+            int order;
+            while (true) {
+                std::string input = "";
+                getline(std::cin, input);
+        
+                // This code converts from string to number safely.
+                std::stringstream myStream(input);
+                if (myStream >> order){
+                    if(1<=order && order<=4){
+                        break;
+                    }
+                }
+                std::cout << "Invalid number, please try again\n";
+                std::cout << "Please enter a valid number: \n";
+            }
+
+            std::cout << "Now chose in what order:\n" 
+            << "Ascending - 1\n"
+            << "Descending - 0\n"
+            << "Choose order:";
+            int another_order;
+            while (true) {
+                std::string input = "";
+                getline(std::cin, input);
+        
+                // This code converts from string to number safely.
+                std::stringstream myStream(input);
+                if (myStream >> another_order){
+                    if(0<=another_order && another_order<=1){
+                        break;
+                    }
+                }
+                std::cout << "Invalid number, please try again\n";
+                std::cout << "Please enter a valid number: \n";
+            }
+            switch(order){
+                case 1:
+                    allGoals[goal].sort_array_of_tasks_by_name(another_order);
+                case 2:
+                    allGoals[goal].sort_array_of_tasks_by_importance(another_order);
+                case 3:
+                    allGoals[goal].sort_array_of_tasks_by_difficulty(another_order);
+                case 4:
+                    allGoals[goal].sort_array_of_tasks_by_time_to_complete(another_order);
+            }
+            allGoals[goal].show_goal();
+            std::cout << "===============================================\n";
+
+
         
         // case 6:
         
@@ -796,10 +1156,7 @@ int main(){
         // case 8:
         
         // case 9:
-        
-        // case 10:
-        
-        // case 11:
+
     }
 
 }
